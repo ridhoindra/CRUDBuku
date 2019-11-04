@@ -34,6 +34,8 @@
                         <td>
                             <button type="button" class="btn btn-sm btn-info edit-post" data-id="{{ id }}"
                                 data-judul="{{ judul }}" data-pengarang="{{ pengarang }}" data-penerbit="{{ penerbit }}">PERBARUI</button>
+                            <button type="button" class="btn btn-sm btn-info detail-post" data-id="{{ id }}" data-judul="{{ judul }}"
+                                data-pengarang="{{ pengarang }}" data-penerbit="{{ penerbit }}">DETAIL</button>
                             <button type="button" class="btn btn-sm btn-danger delete-post"
                                 data-id="{{ id }}">HAPUS</button>
                         </td>
@@ -89,11 +91,11 @@
                             <input type="text" class="form-control" name="judul" id="edit_judul">
                         </div>
                         <div class="form-group">
-                            <label for="edit_pengarang">Content</label>
+                            <label for="edit_pengarang">Pengarang</label>
                             <input type="text" class="form-control" name="pengarang" id="edit_pengarang">
                         </div>
                         <div class="form-group">
-                            <label for="edit_penerbit">Content</label>
+                            <label for="edit_penerbit">Penerbit</label>
                             <input type="text" class="form-control" name="penerbit" id="edit_penerbit">
                         </div>
                         <div class="form-group text-center">
@@ -127,6 +129,35 @@
         </div>
     </div>
 
+    <div id="DetailPostModal" class="modal fade">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">DETAIL</div>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="/" style="padding: 15px;">
+                    <input type="hidden" name="id" id="edit_id">
+                    <div class="form-group">
+                        <label for="edit_judul">Judul</label>
+                        <input type="text" class="form-control" name="judul" id="detail_judul" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_pengarang">Pengarang</label>
+                        <input type="text" class="form-control" name="pengarang" id="detail_pengarang" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_penerbit">Penerbit</label>
+                        <input type="text" class="form-control" name="penerbit" id="detail_penerbit" readonly>
+                    </div>
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary" type="submit">KELUAR</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -145,6 +176,20 @@
             $('#edit_pengarang').val(pengarang)
             $('#edit_penerbit').val(penerbit)
         })
+
+        $('.detail-post').on('click', function () {
+                var id = $(this).data('id')
+                var judul = $(this).data('judul')
+                var pengarang = $(this).data('pengarang')
+                var penerbit = $(this).data('penerbit')
+
+                $('#DetailPostModal').modal('show')
+
+                $('#detail_id').val(id)
+                $('#detail_judul').val(judul)
+                $('#detail_pengarang').val(pengarang)
+                $('#detail_penerbit').val(penerbit)
+            })
 
         $('.delete-post').on('click', function () {
             var id = $(this).data('id')
